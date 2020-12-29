@@ -1,0 +1,204 @@
+\documentclass[a4paper, 14pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[top = 2cm, bottom = 2 cm]{geometry}
+\usepackage{cmap}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{indentfirst}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{titlesec}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+\titleformat*{\paragraph}{\large\bfseries}
+\titleformat*{\subparagraph}{\large\bfseries}
+
+
+\begin{document}
+
+\section*{Задание}
+
+Вариант 8 
+
+\begin{enumerate}
+
+\item Назначить адреса подсетей
+\begin{itemize}
+\item	Подсеть 1: 192.168.8.0 /24
+\item	Подсеть 2: 192.168.9.0 /24
+\item	Подсеть 3: 192.168.10.0 /24
+\item	Подсеть 4: 192.168.11.0 /24
+\item	Подсеть 5 (В задаче 3): 192.168.18.0 /24
+\end{itemize}
+
+\item Настроить динамическую маршрутизацию в прилагаемом .pkt файле на стенде I через протокол RIPv2 так, чтобы пинг любым хостом или маршрутизатором любого другого хоста или маршрутизатора был успешным.
+Представить отдельным .pkt файлом. 
+
+\item Настроить динамическую маршрутизацию в сети в прилагаемом .pkt файле на стенде II через протокол OSPF так, чтобы пинг любым хостом или маршрутизатором любого другого хоста или маршрутизатора был успешным. Разделить при этом сеть на области OSPF в соответствии со схемой. Выполнить указания в лабораторной работе.
+Представить отдельным .pkt файлом. 
+
+
+\end{enumerate}
+
+\section*{Разделение на подсети}
+
+\begin{table}[H]
+    \centering
+    \caption{Разделение на подсети на стенде I}
+    \begin{tabular}{|p{0.8cm}|p{3cm}|p{6cm}|}
+        \hline
+        № подсети & IP-адрес подсети & Диапазон адресов  \\
+        \hline
+        1 & 192.168.8.0 & 192.168.8.1 - 192.168.8.2  \\
+        \hline
+        2 & 192.168.7.0 & 192.168.9.1 - 192.168.9.2  \\
+        \hline
+        3 & 192.168.10.0 & 192.168.10.1 - 192.168.10.2  \\
+        \hline
+        4 & 192.168.11.0 & 192.168.11.1 - 192.168.11.2 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{stend1}
+    \caption{Разделение на подсети на стенде I}
+\end{figure}
+
+\newpage
+\begin{table}[H]
+    \centering
+    \caption{Разделение на подсети на стенде II}
+    \begin{tabular}{|p{0.8cm}|p{3cm}|p{6cm}|}
+        \hline
+        № подсети & IP-адрес подсети & Диапазон адресов  \\
+        \hline
+        1 & 192.168.8.0 & 192.168.8.1 - 192.168.8.2  \\
+        \hline
+        2 & 192.168.7.0 & 192.168.9.1 - 192.168.9.2  \\
+        \hline
+        3 & 192.168.10.0 & 192.168.10.1 - 192.168.10.2  \\
+        \hline
+        4 & 192.168.11.0 & 192.168.11.1 - 192.168.11.2 \\
+        \hline
+        5 & 192.168.18.0 & 192.168.18.4 - 192.168.11.2 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \includegraphics[scale=0.6]{stend2}
+    \caption{Разделение на подсети на стенде II}
+\end{figure}
+
+
+\newpage
+\section*{Настройка RIPv2}
+
+Для корректной работы динамической маршрутизации необходимо настроить все роутеры для использования RIPv2.\\
+
+\textbf{network network\_num}, где network\_num - адрес сети. Позволяет добавить сеть/диапазон адресов, который будет использоваться для рассылки обновлений RIP.
+
+\textbf{version 2} - изменение версии RIP на RIPv2\\
+
+
+На рис. \ref{fig:1} показана настройка RIPv2 для Router0. Остальные роутеры настраиваются аналогично.
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{router0}
+    \caption{CLI роутера Router0}
+    \label{fig:1}
+    \end{center}
+\end{figure}
+
+Пинг PC3 из PC0:
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{ping1}
+    \caption{Пинг PC3 из PC0}
+    \label{fig:2}
+    \end{center}
+\end{figure}
+
+\newpage
+\section*{Настройка OSPF}
+
+Все роутеры были настроены для динамической маршрутизации через протокол OSPF.
+
+На рис. \ref{fig:3} -  \ref{fig:6} показана настройка каждого роутера.
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{router7}
+    \caption{CLI роутера Router7}
+    \label{fig:3}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{router8}
+    \caption{CLI роутера Router8}
+    \label{fig:4}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{router9}
+    \caption{CLI роутера Router9}
+    \label{fig:5}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{router10}
+    \caption{CLI роутера Router10}
+    \label{fig:6}
+    \end{center}
+\end{figure}
+
+\newpage
+
+Результат выполнения команды \textbf{sh ip ospf neighbor} для роутера Router8:
+
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{neighbor}
+    \caption{CLI роутера Router8}
+    \label{fig:7}
+    \end{center}
+\end{figure}
+
+
+\textbf{DR} -  Router10\\
+
+\textbf{BDR} -  Router9\\
+
+Роль \textbf{ABR} имеют все роутеры, т.к. все они соединены с различными зонами.\\
+
+Пинг PC9 из PC8:
+
+\begin{figure}[H]
+	\begin{center} 
+    \includegraphics[scale=0.5]{ping2}
+    \caption{Пинг PC9 из PC8}
+    \label{fig:2}
+    \end{center}
+\end{figure}
+
+\end{document}
