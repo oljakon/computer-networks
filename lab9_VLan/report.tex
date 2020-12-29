@@ -1,0 +1,161 @@
+\documentclass[a4paper, 14pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[top = 2cm, bottom = 2 cm]{geometry}
+\usepackage{cmap}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{indentfirst}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{titlesec}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+\titleformat*{\paragraph}{\large\bfseries}
+\titleformat*{\subparagraph}{\large\bfseries}
+
+\begin{document}
+
+\section*{Задание}
+
+Вариант 8 
+
+\begin{enumerate}
+
+\item Назначить адреса подсетей
+\begin{itemize}
+\item	Подсеть 1: 192.168.8.0 /24
+\item Подсеть 2: 192.168.9.0 /24
+\item	Подсеть 3: 192.168.10.0 /24
+\end{itemize}
+
+\item Настроить поддержку трех виртуальных локальных сетей (VLan 10, 20, 30) на коммутаторе.
+
+\item Настроить маршрутизацию между виртуальными локальными сетями на маршрутизаторе.
+
+\item Выделить и озаглавить на схеме каждую виртуальную локальную сеть.
+
+\end{enumerate}
+
+\section*{Разделение на подсети}
+
+\begin{table}[H]
+    \centering
+    \caption{Разделение на подсети на стенде II}
+    \begin{tabular}{|p{0.8cm}|p{3cm}|p{6cm}|}
+        \hline
+        № подсети & IP-адрес подсети & Диапазон адресов  \\
+        \hline
+        1 & 192.168.8.0 & 192.168.8.1 - 192.168.8.254  \\
+        \hline
+        2 & 192.168.9.0 & 192.168.9.1 - 192.168.9.254  \\
+        \hline
+        3 & 192.168.10.0 & 192.168.10.1 - 192.168.10.254  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \includegraphics[scale=0.7]{subnet}
+    \label{fig:1}
+\end{figure}
+
+\section*{Настройка поддержки виртуальных локальных сетей}
+
+Была настроена поддержка трех виртуальных локальных сетей на коммутаторе. Ниже приведены команды, которые вводились в CLI коммутатора.
+
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{1}
+    \label{fig:1}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{2}
+    \label{fig:1}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{3}
+    \label{fig:1}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{4}
+    \label{fig:1}
+\end{figure}
+
+\newpage
+Результат можно проверить с помощью команды \textbf{show vlan}:
+
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{show}
+    \label{fig:1}
+\end{figure}
+
+Далее приведены выставленные в результате выполнения команд настройки у интерфейсов в поле VLan.
+
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{5}
+    \label{fig:2}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{6}
+    \label{fig:3}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{7}
+    \label{fig:4}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{8}
+    \label{fig:5}
+\end{figure}
+
+\newpage
+\section*{Настройка маршрутизации между виртуальными локальными сетями на маршрутизаторе}
+
+Для настройки маршрутизатора были введены следующие команды: 
+
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{9}
+    \label{fig:6}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{10}
+    \label{fig:6}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{11}
+    \label{fig:6}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[scale=0.5]{12}
+    \label{fig:6}
+\end{figure}
+
+После в конечных узлах всех трех подсетей в качестве шлюза по умолчанию были выставлены адреса, приведенные выше.
+
+\newpageИзучение технологии виртуальных локальных сетей (VLan) в сетевом симуляторе. Настройка маршрутизации между VLan.
+\section*{Виртуальные локальные сети}
+
+На рисунке ниже выделена каждая виртуальная локальная сеть.
+
+\begin{figure}[H]
+    \includegraphics[scale=0.7]{vlan}
+    \label{fig:7}
+\end{figure}
+
+Результат проверки соединения мужду Server0 и PC3:
+
+\begin{figure}[H]
+    \includegraphics[scale=0.7]{ping}
+    \label{fig:8}
+\end{figure}
+
+\end{document}
